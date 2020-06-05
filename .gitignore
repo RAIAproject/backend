@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!*.go
+!.gitignore
+!go.*
+!docker-compose.yml

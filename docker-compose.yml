@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: cache
+    expose: 
+      - 6379
+  app:
+    links:
+      - redis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - backend.env
+    depends_on: 
+      - redis

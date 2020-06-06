@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/go-redis/redis"
 	"github.com/gorilla/mux"
@@ -35,6 +36,7 @@ func resolveEquation(w http.ResponseWriter, r *http.Request) {
 	q.Add("appid", appid)
 	q.Add("i", equation)
 	req.URL.RawQuery = q.Encode()
+	req.URL.RawQuery = strings.Replace(req.URL.RawQuery, "+", "%2B", -1)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
